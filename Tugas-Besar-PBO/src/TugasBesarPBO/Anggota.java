@@ -1,4 +1,4 @@
 package TugasBesarPBO;
-public class Anggota {
+public class Anggota extends Orang {
     
 }

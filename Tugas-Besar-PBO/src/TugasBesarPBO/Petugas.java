@@ -1,4 +1,4 @@
 package TugasBesarPBO;
-public class Petugas {
+public class Petugas extends Orang{
     
 }
