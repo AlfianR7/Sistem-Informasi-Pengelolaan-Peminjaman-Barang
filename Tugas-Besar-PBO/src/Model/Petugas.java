@@ -1,4 +1,4 @@
-package TugasBesarPBO;
+package Model;
 public class Petugas extends Orang{
     private String noPetugas;
     private String tahunMasuk;

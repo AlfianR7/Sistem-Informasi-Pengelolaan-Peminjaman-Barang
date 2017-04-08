@@ -1,4 +1,4 @@
-package TugasBesarPBO;
+package Model;
 public class Orang {
     private String nama;
     private char jenisKelamin;
