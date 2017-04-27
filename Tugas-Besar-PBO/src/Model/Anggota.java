@@ -1,42 +1,27 @@
 package Model;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Anggota extends Orang {
-    private String noAnggota;
-    private String Jabatan;
-    private String tahunMasuk;
 
-    public Anggota(String noAnggota, String Jabatan, String nama, char jenisKelamin) {
+    private int ID = 1;
+    private final String idAnggota;
+
+    public Anggota(String nama, String jenisKelamin) {
         super(nama, jenisKelamin);
-        this.noAnggota = noAnggota;
-        this.Jabatan = Jabatan;
-    }
- 
-    public String getNoAnggota() {
-        return noAnggota;
+        idAnggota = "AGT" + ID;
     }
 
-    public void setNoAnggota(String noAnggota) {
-        this.noAnggota = noAnggota;
+    public String getIdAnggota() {
+
+        return idAnggota;
     }
 
-    public String getJabatan() {
-        return Jabatan;
+    public String toString() {
+        String s = "ID Anggota = " + idAnggota + ", " + "Nama = " + nama + ", " + "Jenis Kelamin = " + jenisKelamin;
+        return s;
     }
 
-    public void setJabatan(String Jabatan) {
-        this.Jabatan = Jabatan;
-    }
-
-    public String getTahunMasuk() {
-        return tahunMasuk;
-    }
-
-    public void setTahunMasuk(String tahunMasuk) {
-        this.tahunMasuk = tahunMasuk;
-    }
-    
-    
-    
-
-    
-    
 }
+

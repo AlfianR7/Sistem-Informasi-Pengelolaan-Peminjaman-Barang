@@ -1,9 +1,9 @@
 package Model;
 public class Orang {
-    private String nama;
-    private char jenisKelamin;
+    String nama;
+    String jenisKelamin;
 
-    public Orang(String nama, char jenisKelamin) {
+    public Orang(String nama, String jenisKelamin) {
         this.nama = nama;
         this.jenisKelamin = jenisKelamin;
     }
@@ -16,11 +16,11 @@ public class Orang {
         this.nama = nama;
     }
 
-    public char getJenisKelamin() {
+    public String getJenisKelamin() {
         return jenisKelamin;
     }
 
-    public void setJenisKelamin(char jenisKelamin) {
+    public void setJenisKelamin(String jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
     
