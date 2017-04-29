@@ -1,11 +1,12 @@
 package Model;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Petugas extends Orang {
+public class Petugas extends Orang implements Serializable {
 
-    private int ID = 1;
+    private static int ID = 1;
     private String idPetugas;
     private String user;
     private String pass;
@@ -14,7 +15,7 @@ public class Petugas extends Orang {
         super(nama, jenisKelamin);
         this.user = nama;
         this.pass = pass;
-        idPetugas = "PTG" + ID;
+        idPetugas = "PTG" + ID++;
     }
 
     public String getUser() {

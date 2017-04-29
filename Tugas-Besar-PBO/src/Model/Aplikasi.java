@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 import java.io.EOFException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Aplikasi {
 
@@ -18,6 +16,7 @@ public class Aplikasi {
     private ArrayList<Anggota> daftarAnggota;
     private ArrayList<Peminjaman> daftarPeminjaman;
     private ArrayList<Barang> daftarBarang;
+    private ArrayList<Barang> daftarBarangPinjaman;
 
     private SaveFile save;
     private int IntAuth;
@@ -27,14 +26,17 @@ public class Aplikasi {
         daftarAnggota = new ArrayList();
         daftarPeminjaman = new ArrayList();
         daftarBarang = new ArrayList();
+        daftarBarangPinjaman = new ArrayList<>();
+        save = new SaveFile();
 
     }
 //####################################################################################################
 //####################################################################################################
 
 //  PENGOLAHAN DATA ANGGOTA
-    public void addAnggota(String nama, String jenisKelamin) {
+    public void addAnggota(String nama, String jenisKelamin) throws IOException {
         daftarAnggota.add(new Anggota(nama, jenisKelamin));
+        saveAnggota();
     }
 
     public String[] ListAnggota() {
@@ -67,13 +69,14 @@ public class Aplikasi {
             System.out.println("Data Anggota Kosong");
         }
     }
+
     public String[] getListAnggota() {
         List idEmp = daftarAnggota.stream()
                 .filter(e -> !(e instanceof Anggota))
                 .map(e -> e.getIdAnggota()).collect(Collectors.toList());
         return (String[]) idEmp.stream().toArray(size -> new String[size]);
     }
-    
+
     public Anggota getAnggota(String idAnggota) {
         return daftarAnggota.stream()
                 .filter(a -> a.getIdAnggota().equals(idAnggota))
@@ -129,8 +132,8 @@ public class Aplikasi {
 
     public void LoginPetugas(String username, String pass) {
         Petugas P = getPetugasUsername(username);
-        if ( "a".equals(username) || P.getUser().equals(username)) {
-            if ("a".equals(pass ) || P.getPass().equals(pass)) {
+        if ("admin".equals(username) || P.getUser().equals(username)) {
+            if ("admin".equals(pass) || P.getPass().equals(pass)) {
                 System.out.println("Berhasil Login");
                 IntAuth = 1;
             } else {
@@ -147,11 +150,16 @@ public class Aplikasi {
 //####################################################################################################
 //####################################################################################################
 // DATA BARANG
-    public void addBarang(String namaBarang, String status) {
-        daftarBarang.add(new Barang(namaBarang, status));
+    public void addBarang(String namaBarang) {
+        daftarBarang.add(new Barang(namaBarang));
     }
 
-    public String[] ListBarang() {
+    public void addBarangPinjaman(String idBarang, String namaBarang) {
+        daftarBarangPinjaman.removeAll(daftarBarangPinjaman);
+        daftarBarangPinjaman.add(new Barang(idBarang, namaBarang));
+    }
+
+    public String[] ListBarang() throws IOException {
         List listBrg = daftarBarang.stream().map(E -> "ID Barang : " + E.getIdBarang() + ", "
                 + "Nama Barang : " + E.getNamaBarang() + ", "
                 + "Status : " + E.getStatus()).collect(Collectors.toList());
@@ -163,45 +171,37 @@ public class Aplikasi {
                 .filter(b -> b.getIdBarang().equals(idBarang))
                 .findFirst().orElse(null);
     }
-////####################################################################################################
-    ////####################################################################################################
-    //// DATA PEMINJAMAN
 
-    public void addPinjaman(String idBarang){
-        Barang B = getBarang(idBarang);
-        if ( B.getIdBarang().equals(idBarang)){
-            
-        }
+    public Barang getBarangNama(String namaBarang) {
+        return daftarBarang.stream()
+                .filter(b -> b.getNamaBarang().equals(namaBarang))
+                .findFirst().orElse(null);
     }
+////####################################################################################################
+////####################################################################################################
+
+//// DATA PEMINJAMAN
     public void addPeminjaman(String idBarang, String namaAnggota) {
         Barang b = getBarang(idBarang);
         Anggota a = getAnggotaNama(namaAnggota);
-        Peminjaman p;
         try {
             if (b.getIdBarang().equals(idBarang)) {
-                daftarPeminjaman.add(new Peminjaman(daftarBarang, a));
+                daftarPeminjaman.add(new Peminjaman(daftarBarangPinjaman, a));
             }
         } catch (Exception e) {
-            System.out.println("Id Barang Tidak sesuai");
+            System.out.println("Data Barang Tidak sesuai");
         }
     }
-//
-//    public String[] ListPeminjaman() {
-//        List listPnj = daftarPeminjaman.stream().filter(p -> p instanceof Barang  )
-//                .map(P -> P)
-//        
-//        return;
-//    }
-//
-//    public Barang getBarang(String idBarang) {
-//        return daftarBarang.stream()
-//                .filter(a -> a.getIdBarang().equals(idBarang))
-//                .findFirst().orElse(null);
-//    }
 
+    public void ListPeminjaman() {
+        for (Peminjaman x : daftarPeminjaman) {
+            x.ViewListPeminjaman();
+        }
+    }
 ////####################################################################################################
 ////####################################################################################################
 // UPDATE DATA FROM FILE
+
     public void loadAnggota() throws FileNotFoundException, IOException {
         try {
             daftarAnggota = (ArrayList<Anggota>) save.getObject("fileAnggota.txt");
@@ -232,6 +232,36 @@ public class Aplikasi {
     public int LoginAuth() {
         return IntAuth;
     }
+
+//    public void saveFile() throws FileNotFoundException, IOException{
+//    try {
+//			FileOutputStream f = new FileOutputStream(new File("myObjects.txt"));
+//			ObjectOutputStream o = new ObjectOutputStream(f);
 //
-//}
+//			// Write objects to file
+//			o.writeObject(ListAnggota());
+//
+//			o.close();
+//			f.close();
+//
+//			FileInputStream fi = new FileInputStream(new File("myObjects.txt"));
+//			ObjectInputStream oi = new ObjectInputStream(fi);
+//
+//			// Read objects
+//			Anggota A = (Anggota) oi.readObject();
+//
+//			
+//			ListAnggota();
+//
+//			oi.close();
+//			fi.close();
+//
+//		} catch (FileNotFoundException e) {
+//			System.out.println("File not found");
+//		} catch (IOException e) {
+//			System.out.println("Error initializing stream");
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}}
 }

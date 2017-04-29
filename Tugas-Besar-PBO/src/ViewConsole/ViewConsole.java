@@ -33,19 +33,13 @@ public class ViewConsole {
     public void Menu() {
         int n = 0;
         Anggota A;
-//        Anggota A = new Anggota ("JONI CAGUR","LOKILOKI");
-//        A.setNama("JONI CAGUR");
-//        A.setJenisKelamin("Lokilki");
-
-//        List<Model.Anggota> listAng = new ArrayList();
         do {
             try {
                 System.out.println("Menu");
                 System.out.println("1.Login Petugas");
                 System.out.println("2.Daftar Anggota Baru");
                 System.out.println("3.Daftar Petugas Baru");
-                System.out.println("4.view Barang");
-                System.out.println("5.Load Data");
+                System.out.println("4.Load Data");
                 System.out.println("0. Exit");
                 System.out.println("Pilih Inputan");
                 n = InputInt();
@@ -64,8 +58,10 @@ public class ViewConsole {
                                     System.out.println("1.Delete Anggota");
                                     System.out.println("2.View Anggota");
                                     System.out.println("3.View Petugas");
-                                    System.out.println("4.Input Barang");
-                                    System.out.println("5.Pinjaman");
+                                    System.out.println("4.View peminjaman");
+                                    System.out.println("5.View Barang");
+                                    System.out.println("6.Input Barang");
+                                    System.out.println("7.Pinjaman");
                                     System.out.println("0.Kembali");
 
                                     System.out.println("Pilih inputan");
@@ -106,33 +102,47 @@ public class ViewConsole {
                                             System.out.println("-------------------------------------");
                                             break;
                                         case 4:
+                                            System.out.println("Daftar Peminjaman");
+                                            model.ListPeminjaman();
+                                            System.out.println("-------------------------------------");
+                                            break;
+                                        case 5:
+                                            System.out.println("Daftar Barang");
+                                            model.viewList(model.ListBarang());
+                                            System.out.println("-------------------------------------");
+                                            break;
+                                        case 6:
                                             System.out.println("Input Barang");
                                             System.out.println("-------------------------------------");
                                             System.out.println("Nama Barang");
                                             String namaBarang = scanStr.nextLine();
-                                            String status = scanStr.nextLine();
-                                            model.addBarang(namaBarang, status);
+                                            model.addBarang(namaBarang);
                                             System.out.println("-------------------------------------");
                                             break;
-                                        case 5:
+                                        case 7:
                                             System.out.println("Pinjaman ");
+                                            System.out.println("Masukan ID Barang");
+                                            String idBarang = scanStr.nextLine();
+                                            System.out.println("Masukan Nama Barang");
+                                            String namaBarangP = scanStr.nextLine();
+                                            System.out.println("Masukan Nama Anggota");
+                                            String namaAnggota = scanStr.nextLine();
+                                            model.addBarangPinjaman(idBarang, namaBarangP);
+                                            System.out.println("test");
+                                            model.addPeminjaman(idBarang, namaAnggota);
                                             break;
-
                                     }
                                 } catch (Exception e) {
-                                    System.out.println("Error , Inputan tidak sesuai dengan pilihan");
+                                    System.out.println("Terjadi Kesalahan , silahkan coba lagi");
                                 } finally {
                                     scanInt = new Scanner(System.in);
                                     scanStr = new Scanner(System.in);
                                 }
                             } while (m != 0);
-
                         } else {
                             break;
                         }
-
                         break;
-
                     case 2:
                         System.out.println("Registrasi Anggota");
                         String nama;
@@ -154,7 +164,6 @@ public class ViewConsole {
                             }
                         }
                         model.addAnggota(nama, jenisKelamin);
-                        model.saveAnggota();
                         break;
                     case 3:
                         String Nama;
@@ -181,11 +190,6 @@ public class ViewConsole {
                         model.addPetugas(Nama, JenisKelamin, password);
                         break;
                     case 4:
-                        System.out.println("Daftar Barang");
-                        model.viewList(model.ListBarang());
-                        System.out.println("-------------------------------------");
-                        break;
-                    case 5:
                         System.out.println("Load Data");
                         model.loadAnggota();
                         break;
@@ -195,9 +199,8 @@ public class ViewConsole {
                     default:
                         throw new IllegalStateException("Inputan Salah");
                 }
-
             } catch (Exception e) {
-                System.out.println("Error , Inputan tidak sesuai dengan pilihan");
+                System.out.println("Terjadi Kesalahan , silahkan coba lagi");
             } finally {
                 scanInt = new Scanner(System.in);
                 scanStr = new Scanner(System.in);
@@ -205,5 +208,4 @@ public class ViewConsole {
         } while (n
                 != 0);
     }
-
 }

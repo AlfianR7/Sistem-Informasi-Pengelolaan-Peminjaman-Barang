@@ -1,19 +1,20 @@
 package Model;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Barang {
+public class Barang implements Serializable {
 
-    private int ID = 1;
+    private static int ID = 1;
     private String idBarang;
     private String namaBarang;
     private String Status;
 
-    public Barang(String namaBarang, String Status) {
+    public Barang(String namaBarang) {
         this.namaBarang = namaBarang;
-        this.Status = Status;
-        idBarang ="BRG "+ID;
+        this.Status = "Tersedia";
+        idBarang ="BRG"+ID++;
     }
 
     public String getIdBarang() {
@@ -45,4 +46,9 @@ public class Barang {
         return s;
     }
     
+   
+    public Barang(String idBarang, String namaBarang){
+        this.idBarang = idBarang;
+        this.namaBarang = namaBarang;
+    }
 }

@@ -1,20 +1,20 @@
 package Model;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Anggota extends Orang {
+public class Anggota extends Orang implements Serializable {
 
-    private int ID = 1;
+    private static int ID = 1;
     private final String idAnggota;
 
     public Anggota(String nama, String jenisKelamin) {
         super(nama, jenisKelamin);
-        idAnggota = "AGT" + ID;
+        idAnggota = "AGT" + (ID++);
     }
 
     public String getIdAnggota() {
-
         return idAnggota;
     }
 
@@ -24,4 +24,3 @@ public class Anggota extends Orang {
     }
 
 }
-

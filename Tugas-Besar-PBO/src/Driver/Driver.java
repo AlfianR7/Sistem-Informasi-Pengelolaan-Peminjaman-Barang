@@ -6,6 +6,8 @@ public class Driver {
     public static void main(String[] args) {
         Aplikasi apk = new Aplikasi();
         ViewConsole view = new ViewConsole(apk);
+        
+        new Controller.Controller(apk);
         view.Menu();
     }
 }
