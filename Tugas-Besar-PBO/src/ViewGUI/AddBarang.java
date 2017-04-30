@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author Alfian R7
  */
-public class AddAnggota extends javax.swing.JFrame implements View{
+public class AddBarang extends javax.swing.JFrame implements View{
 
     /**
-     * Creates new form AddAnggota
+     * Creates new form AddBarang
      */
-    public AddAnggota() {
+    public AddBarang() {
         initComponents();
     }
 
@@ -30,24 +30,23 @@ public class AddAnggota extends javax.swing.JFrame implements View{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        titleAnggota = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtnamaBarang = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtAnggota = new javax.swing.JTextField();
-        cbJenisKelamin = new javax.swing.JComboBox<>();
         BtnAdd = new javax.swing.JButton();
         BtnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        titleAnggota.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        titleAnggota.setText("Daftar Anggota Baru");
+        jLabel1.setText("ADD Barang");
 
-        jLabel1.setText("Nama Anggota           :");
+        txtnamaBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnamaBarangActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("Jenis Kelamin             :");
-
-        cbJenisKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-Laki", "Perempuan" }));
+        jLabel2.setText("Nama Barang   :");
 
         BtnAdd.setText("ADD");
 
@@ -62,19 +61,16 @@ public class AddAnggota extends javax.swing.JFrame implements View{
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(103, 103, 103)
-                                .addComponent(titleAnggota))
+                                .addGap(115, 115, 115)
+                                .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbJenisKelamin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtnAdd))))
-                        .addGap(0, 37, Short.MAX_VALUE))
+                                    .addComponent(BtnAdd)
+                                    .addComponent(txtnamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 56, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(BtnBack)))
@@ -83,19 +79,15 @@ public class AddAnggota extends javax.swing.JFrame implements View{
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(titleAnggota)
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbJenisKelamin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(BtnAdd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(BtnBack)
                 .addContainerGap())
         );
@@ -103,17 +95,12 @@ public class AddAnggota extends javax.swing.JFrame implements View{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public String GetNamaAnggota(){
-        return txtAnggota.getText();
-    }
+    private void txtnamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnamaBarangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnamaBarangActionPerformed
     
-    public String getJenisKelamin(){
-        if (cbJenisKelamin.getSelectedIndex()== 0){
-            return "Laki-Laki";
-        }
-        else{
-            return "Perempuan";
-        }
+    public String getNamaBarang(){
+        return txtnamaBarang.getText();
     }
     
     public Object getBtnAdd(){
@@ -125,7 +112,7 @@ public class AddAnggota extends javax.swing.JFrame implements View{
     }
     
     public void reset(){
-        txtAnggota.setText("");
+        txtnamaBarang.setText("");
     }
     
     @Override
@@ -136,16 +123,14 @@ public class AddAnggota extends javax.swing.JFrame implements View{
     
     @Override
     public void ViewErrorMsg(String errMsg){
-        JOptionPane.showMessageDialog(this, errMsg);
+        JOptionPane.showConfirmDialog(this, errMsg);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAdd;
     private javax.swing.JButton BtnBack;
-    private javax.swing.JComboBox<String> cbJenisKelamin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel titleAnggota;
-    private javax.swing.JTextField txtAnggota;
+    private javax.swing.JTextField txtnamaBarang;
     // End of variables declaration//GEN-END:variables
 }

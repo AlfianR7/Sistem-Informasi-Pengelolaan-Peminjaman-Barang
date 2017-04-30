@@ -155,6 +155,12 @@ public class AddPeminjaman extends javax.swing.JFrame implements View {
     public void ViewErrorMsg(String errMsg){
         JOptionPane.showMessageDialog(this, errMsg);
     }
+    
+    public void reset(){
+        txtIDBarang.setText("");
+        txtNamaAnggota.setText("");
+        txtNamaBarang.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAddPinjaman;

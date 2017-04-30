@@ -44,6 +44,7 @@ public class ViewAnggotaAndDelete extends javax.swing.JFrame implements View{
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         listAnggota = new javax.swing.JList<>();
+        BtnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +80,8 @@ public class ViewAnggotaAndDelete extends javax.swing.JFrame implements View{
 
         jScrollPane3.setViewportView(jScrollPane2);
 
+        BtnRefresh.setText("Refresh");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,7 +107,9 @@ public class ViewAnggotaAndDelete extends javax.swing.JFrame implements View{
                                 .addGap(18, 18, 18)
                                 .addComponent(txtDelID)))
                         .addGap(62, 62, 62)
-                        .addComponent(BtnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BtnRefresh)
+                            .addComponent(BtnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,8 +133,10 @@ public class ViewAnggotaAndDelete extends javax.swing.JFrame implements View{
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(BtnRefresh))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtDelID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -156,12 +163,15 @@ public class ViewAnggotaAndDelete extends javax.swing.JFrame implements View{
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnBackActionPerformed
 
-    public Object getDelete(){
+    public Object getBtnDelete(){
         return BtnDelete;
     }
     
-    public Object getBack(){
+    public Object getBtnBack(){
         return BtnBack;
+    }
+    public Object getBtnRefresh(){
+        return BtnRefresh;
     }
     
     public void setDetailAnggota(String x){
@@ -199,10 +209,15 @@ public class ViewAnggotaAndDelete extends javax.swing.JFrame implements View{
         return txtDelNama.getText();
     }
     
+    public void reset (){
+        txtDelID.setText("");
+        txtDelNama.setText("");
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBack;
     private javax.swing.JButton BtnDelete;
+    private javax.swing.JButton BtnRefresh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

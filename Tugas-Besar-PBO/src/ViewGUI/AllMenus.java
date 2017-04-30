@@ -35,6 +35,8 @@ public class AllMenus extends javax.swing.JFrame implements View{
         BtnPeminjaman = new javax.swing.JButton();
         BtnAddPinjaman = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        BtnLogout = new javax.swing.JButton();
+        BtnAddBarang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,42 +56,56 @@ public class AllMenus extends javax.swing.JFrame implements View{
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Inventaris Peminjaman Barang");
 
+        BtnLogout.setText("Logout");
+
+        BtnAddBarang.setText("ADD Barang");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BtnPeminjaman)))
+                .addContainerGap(66, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BtnViewAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(BtnBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(28, 28, 28)
-                            .addComponent(BtnPeminjaman))))
-                .addGap(49, 49, 49)
-                .addComponent(BtnAddPinjaman)
-                .addContainerGap(55, Short.MAX_VALUE))
+                    .addComponent(BtnBarang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BtnAddPinjaman, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnAddBarang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(68, 68, 68))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnLogout)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(BtnViewAnggota)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnViewAnggota)
+                    .addComponent(BtnAddBarang))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnBarang)
                     .addComponent(BtnAddPinjaman))
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
                 .addComponent(BtnPeminjaman)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnLogout)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,7 +115,9 @@ public class AllMenus extends javax.swing.JFrame implements View{
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnPeminjamanActionPerformed
 
-
+    public Object getBtnLogout(){
+        return BtnLogout;
+    }
     public Object getBtnAddPinjaman(){
         return BtnAddPinjaman;
     }
@@ -108,12 +126,16 @@ public class AllMenus extends javax.swing.JFrame implements View{
         return BtnBarang;
     }
     
-    public Object getPeminjaman(){
+    public Object getBtnPeminjaman(){
         return BtnPeminjaman;
     }
     
-    public Object getAnggota(){
+    public Object getBtnAnggota(){
         return BtnViewAnggota;
+    }
+    
+    public Object getBtnAddBarang(){
+        return BtnAddBarang;
     }
     
     @Override
@@ -122,14 +144,19 @@ public class AllMenus extends javax.swing.JFrame implements View{
         BtnBarang.addActionListener(e);
         BtnPeminjaman.addActionListener(e);
         BtnViewAnggota.addActionListener(e);
+        BtnLogout.addActionListener(e);
+        BtnAddBarang.addActionListener(e);
     }
     
+    @Override
     public void ViewErrorMsg(String errMsg){
         JOptionPane.showMessageDialog(this, errMsg);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAddBarang;
     private javax.swing.JButton BtnAddPinjaman;
     private javax.swing.JButton BtnBarang;
+    private javax.swing.JButton BtnLogout;
     private javax.swing.JButton BtnPeminjaman;
     private javax.swing.JButton BtnViewAnggota;
     private javax.swing.JLabel jLabel1;

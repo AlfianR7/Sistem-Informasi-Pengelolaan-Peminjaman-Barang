@@ -165,7 +165,12 @@ public class Aplikasi {
                 + "Status : " + E.getStatus()).collect(Collectors.toList());
         return (String[]) listBrg.stream().toArray(arr -> new String[arr]);
     }
-
+    public String[] getListBarang() {
+        List idBrg = daftarBarang.stream()
+                .filter(e -> !(e instanceof Barang))
+                .map(e -> e.getIdBarang()).collect(Collectors.toList());
+        return (String[]) idBrg.stream().toArray(size -> new String[size]);
+    }
     public Barang getBarang(String idBarang) {
         return daftarBarang.stream()
                 .filter(b -> b.getIdBarang().equals(idBarang))
@@ -192,11 +197,17 @@ public class Aplikasi {
             System.out.println("Data Barang Tidak sesuai");
         }
     }
-
+    
     public void ListPeminjaman() {
         for (Peminjaman x : daftarPeminjaman) {
             x.ViewListPeminjaman();
         }
+    }
+    public String[] getListpeminjaman() {
+        List idPnj = daftarPeminjaman.stream()
+                .filter(e -> !(e instanceof Peminjaman))
+                .map(e -> e.getIdPinjaman()).collect(Collectors.toList());
+        return (String[]) idPnj.stream().toArray(size -> new String[size]);
     }
 ////####################################################################################################
 ////####################################################################################################

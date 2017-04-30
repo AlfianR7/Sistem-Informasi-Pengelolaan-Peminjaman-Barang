@@ -10,6 +10,7 @@ public class Peminjaman implements Serializable {
     private final String idPinjaman;
     private ArrayList<Barang> pinjaman;
     private Anggota peminjam;
+    
 
     public Peminjaman(ArrayList<Barang> pinjaman, Anggota peminjam) {
         this.pinjaman = pinjaman;
@@ -17,6 +18,10 @@ public class Peminjaman implements Serializable {
         idPinjaman = "PNJ" + (ID++);
     }
     
+    
+    public String getIdPinjaman(){
+        return idPinjaman;
+    }
     public void addPinjaman(Barang b){
         pinjaman.add(new Barang(b.getIdBarang(), b.getNamaBarang()));
     }

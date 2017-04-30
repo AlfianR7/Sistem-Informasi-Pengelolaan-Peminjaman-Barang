@@ -2,12 +2,16 @@ package Driver;
 
 import ViewConsole.ViewConsole;
 import Model.Aplikasi;
+import Controller.Controller;
+
 public class Driver {
+
     public static void main(String[] args) {
         Aplikasi apk = new Aplikasi();
-        ViewConsole view = new ViewConsole(apk);
+
+        new Controller(apk);
         
-        new Controller.Controller(apk);
+        ViewConsole view = new ViewConsole(apk);
         view.Menu();
     }
 }
