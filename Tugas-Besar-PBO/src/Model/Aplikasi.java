@@ -103,18 +103,6 @@ public class Aplikasi {
         return (String[]) listPtg.stream().toArray(arr -> new String[arr]);
     }
 
-//    public void LoginPetugas(String users, String pass){
-//        Petugas P = getPetugas(pass);
-//        if ( P.getUser() == users){
-//            if ( P.getPass() == pass){
-//                System.out.println("Berhasil Login");
-//            }else{
-//                System.out.println("Password yang di inputkan salah");
-//            }
-//        }else{
-//            System.out.println("Petugas Belum terdaftar");
-//        }
-//    }
     public Petugas getPetugas(String idPetugas) {
         return daftarPetugas.stream()
                 .filter(a -> a.getIdPetugas().equals(idPetugas))
@@ -165,12 +153,14 @@ public class Aplikasi {
                 + "Status : " + E.getStatus()).collect(Collectors.toList());
         return (String[]) listBrg.stream().toArray(arr -> new String[arr]);
     }
+
     public String[] getListBarang() {
         List idBrg = daftarBarang.stream()
                 .filter(e -> !(e instanceof Barang))
                 .map(e -> e.getIdBarang()).collect(Collectors.toList());
         return (String[]) idBrg.stream().toArray(size -> new String[size]);
     }
+
     public Barang getBarang(String idBarang) {
         return daftarBarang.stream()
                 .filter(b -> b.getIdBarang().equals(idBarang))
@@ -197,12 +187,13 @@ public class Aplikasi {
             System.out.println("Data Barang Tidak sesuai");
         }
     }
-    
+
     public void ListPeminjaman() {
         for (Peminjaman x : daftarPeminjaman) {
             x.ViewListPeminjaman();
         }
     }
+
     public String[] getListpeminjaman() {
         List idPnj = daftarPeminjaman.stream()
                 .filter(e -> !(e instanceof Peminjaman))
@@ -244,35 +235,75 @@ public class Aplikasi {
         return IntAuth;
     }
 
-//    public void saveFile() throws FileNotFoundException, IOException{
-//    try {
-//			FileOutputStream f = new FileOutputStream(new File("myObjects.txt"));
-//			ObjectOutputStream o = new ObjectOutputStream(f);
-//
-//			// Write objects to file
-//			o.writeObject(ListAnggota());
-//
-//			o.close();
-//			f.close();
-//
-//			FileInputStream fi = new FileInputStream(new File("myObjects.txt"));
-//			ObjectInputStream oi = new ObjectInputStream(fi);
-//
-//			// Read objects
-//			Anggota A = (Anggota) oi.readObject();
-//
-//			
-//			ListAnggota();
-//
-//			oi.close();
-//			fi.close();
-//
-//		} catch (FileNotFoundException e) {
-//			System.out.println("File not found");
-//		} catch (IOException e) {
-//			System.out.println("Error initializing stream");
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}}
+// FILE BARANG
+    public void loadBarang() throws FileNotFoundException, IOException {
+        try {
+            daftarBarang = (ArrayList<Barang>) save.getObject("fileBarang.txt");
+        } catch (FileNotFoundException ex) {
+            File f = new File("fileBarang.txt");
+            f.createNewFile();
+        } catch (EOFException ex) {
+            daftarBarang = new ArrayList<>();
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new IOException("error " + ex.getMessage());
+        }
+    }
+
+    public void saveBarang() throws FileNotFoundException, IOException {
+        try {
+            save.saveObject(daftarBarang, "fileBarang.txt");
+        } catch (FileNotFoundException ex) {
+            throw new FileNotFoundException("file not found");
+        } catch (IOException ex) {
+            throw new IOException("error " + ex.getMessage());
+        }
+    }
+
+// FILE PEMINJAMAN
+    public void loadPinjaman() throws FileNotFoundException, IOException {
+        try {
+            daftarPeminjaman = (ArrayList<Peminjaman>) save.getObject("filePeminjaman.txt");
+        } catch (FileNotFoundException ex) {
+            File f = new File("filePeminjaman.txt");
+            f.createNewFile();
+        } catch (EOFException ex) {
+            daftarPeminjaman = new ArrayList<>();
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new IOException("error " + ex.getMessage());
+        }
+    }
+
+    public void savePeminjaman() throws FileNotFoundException, IOException {
+        try {
+            save.saveObject(daftarPeminjaman, "filePeminjaman.txt");
+        } catch (FileNotFoundException ex) {
+            throw new FileNotFoundException("file not found");
+        } catch (IOException ex) {
+            throw new IOException("error " + ex.getMessage());
+        }
+    }
+    
+//FILE PETUGAS
+    public void loadPetugas() throws FileNotFoundException, IOException {
+        try {
+            daftarPetugas = (ArrayList<Petugas>) save.getObject("filePetugas.txt");
+        } catch (FileNotFoundException ex) {
+            File f = new File("filePetugas.txt");
+            f.createNewFile();
+        } catch (EOFException ex) {
+            daftarPetugas = new ArrayList<>();
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new IOException("error " + ex.getMessage());
+        }
+    }
+
+    public void savePetugas() throws FileNotFoundException, IOException {
+        try {
+            save.saveObject(daftarPetugas, "filePetugas.txt");
+        } catch (FileNotFoundException ex) {
+            throw new FileNotFoundException("file not found");
+        } catch (IOException ex) {
+            throw new IOException("error " + ex.getMessage());
+        }
+    }
 }

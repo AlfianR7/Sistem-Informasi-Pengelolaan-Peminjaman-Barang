@@ -95,9 +95,10 @@ public class Controller extends MouseAdapter implements ActionListener {
             } else if (source.equals((p.getBtnAdd()))) {
                 String nama = p.GetNamaPetugas();
                 String JenisKelamin = p.getJenisKelamin();
+                String pass = p.getPasswordPetugas();
                 try {
-                    app.addAnggota(nama, JenisKelamin);
-//                    app.savePetugas();
+                    app.addPetugas(nama, JenisKelamin, pass);
+                    app.savePetugas();
                 } catch (IOException io) {
                     p.ViewErrorMsg(io.getMessage());
                 }
@@ -246,6 +247,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                 String namaA = Ap.getNamaAnggota();
                 try {
                     app.addPeminjaman(ID, namaA);
+                    app.savePeminjaman();
                     JOptionPane.showMessageDialog(null, "Data Telah di inputkan");
                 } catch (Exception io) {
                     Ap.ViewErrorMsg(io.getMessage());
@@ -264,6 +266,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                 String nama = Ab.getNamaBarang();
                 try {
                     app.addBarang(nama);
+                    app.saveBarang();
                     JOptionPane.showMessageDialog(null, "Barang telah di inputkan");
                 } catch (Exception io) {
                     Ab.ViewErrorMsg(io.getMessage());
