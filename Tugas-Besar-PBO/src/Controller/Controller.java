@@ -12,6 +12,7 @@ import ViewGUI.AddBarang;
 import ViewGUI.ViewAnggotaAndDelete;
 import ViewGUI.ViewBarang;
 import ViewGUI.ViewPeminjaman;
+import ViewGUI.ViewPetugas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -29,7 +30,6 @@ import javax.swing.JPanel;
 // Created by:
 // Nama     :Alfian Rahman Aziz
 // NIM      : 1301150063
-
 public class Controller extends MouseAdapter implements ActionListener {
 
     private Aplikasi app;
@@ -182,7 +182,14 @@ public class Controller extends MouseAdapter implements ActionListener {
                 Ab.addListener(this);
                 Am.dispose();
                 view = Ab;
+            } else if (source.equals(Am.getBtnViewPetugas())) {
+                ViewPetugas Vt = new ViewPetugas();
+                Vt.setVisible(true);
+                Vt.addListener(this);
+                Am.dispose();
+                view = Vt;
             }
+
         } else if (view instanceof ViewAnggotaAndDelete) {
             ViewAnggotaAndDelete Vd = (ViewAnggotaAndDelete) view;
             if (source.equals(Vd.getBtnBack())) {
@@ -289,11 +296,30 @@ public class Controller extends MouseAdapter implements ActionListener {
                 }
             }
             Ab.reset();
+        } else if (view instanceof ViewPetugas) {
+            ViewPetugas Vt = (ViewPetugas) view;
+            if (source.equals(Vt.getBtnBack())) {
+                AllMenus Am = new AllMenus();
+                Am.setVisible(true);
+                Am.addListener(this);
+                Vt.dispose();
+                view = Am;
+            } else if (source.equals(Vt.getBtnRefresh())) {
+                try {
+                    app.loadPetugas();
+                    Vt.setListPetugas(app.getListPetugas());
+                } catch (Exception io) {
+                    Vt.ViewErrorMsg(io.getMessage());
+                }
+                Vt.setDetailPetugas("");
+            }
+
         }
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e
+    ) {
         if (view instanceof ViewAnggotaAndDelete) {
             ViewAnggotaAndDelete Va = (ViewAnggotaAndDelete) view;
             String IDanggota = Va.getSelectedIdAnggota();
