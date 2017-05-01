@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// Created by:
+// Nama     :Ahmad Fathoni Z
+// NIM      : 1301154217
+
 public class Barang implements Serializable {
 
     private static int ID = 1;
@@ -21,7 +25,7 @@ public class Barang implements Serializable {
         return idBarang;
     }
 
-    public void setIoBarang(String idBarang) {
+    public void setIdBarang(String idBarang) {
         this.idBarang = idBarang;
     }
 

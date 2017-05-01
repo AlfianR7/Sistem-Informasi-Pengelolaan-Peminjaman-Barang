@@ -15,6 +15,7 @@ import ViewGUI.ViewPeminjaman;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,10 @@ import javax.swing.JPanel;
  *
  * @author Alfian R7
  */
+// Created by:
+// Nama     :Alfian Rahman Aziz
+// NIM      : 1301150063
+
 public class Controller extends MouseAdapter implements ActionListener {
 
     private Aplikasi app;
@@ -99,6 +104,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                 try {
                     app.addPetugas(nama, JenisKelamin, pass);
                     app.savePetugas();
+                    JOptionPane.showMessageDialog(null, "Petugas telah ditambahkan");
                 } catch (IOException io) {
                     p.ViewErrorMsg(io.getMessage());
                 }
@@ -116,6 +122,13 @@ public class Controller extends MouseAdapter implements ActionListener {
                 String username = l.getUsername();
                 String password = l.getPassword();
                 Petugas p = app.getPetugasUsername(username);
+                if (source.equals(l.getBtnRefresh())) {
+                    try {
+                        app.loadPetugas();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 try {
                     if ("admin".equals(username) || p.getUser().equals(username)) {
                         if ("admin".equals(password) || p.getPass().equals(password)) {
@@ -181,7 +194,7 @@ public class Controller extends MouseAdapter implements ActionListener {
             } else if (source.equals(Vd.getBtnRefresh())) {
                 try {
                     app.loadAnggota();
-                    Vd.setListAnggota(app.getListAnggota());
+                    Vd.setListAnggota(app.ListAnggota());
                 } catch (IOException io) {
                     Vd.ViewErrorMsg(io.getMessage());
                 }
@@ -190,6 +203,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                 String id = Vd.getDeleteID();
                 try {
                     app.deleteAnggotaIndexID(id);
+                    app.saveAnggota();
                 } catch (Exception io) {
                     JOptionPane.showMessageDialog(null, "ID tidak Terdaftar");
                 }
@@ -197,6 +211,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                 String nama = Vd.getDeleteNama();
                 try {
                     app.deleteAnggotaIndexNama(nama);
+                    app.saveAnggota();
                 } catch (Exception io) {
                     JOptionPane.showMessageDialog(null, "Nama tidak Terdaftar");
                 }
@@ -211,11 +226,12 @@ public class Controller extends MouseAdapter implements ActionListener {
                 view = Am;
             } else if (source.equals(Vb.getRefresh())) {
                 try {
-//                    app.loadBarang();
-                    Vb.setListbarang(app.getListBarang());
+                    app.loadBarang();
+                    Vb.setListbarang(app.ListBarang());
                 } catch (Exception io) {
                     Vb.ViewErrorMsg(io.getMessage());
                 }
+                Vb.setDetailBarang("");
             }
         } else if (view instanceof ViewPeminjaman) {
             ViewPeminjaman Vp = (ViewPeminjaman) view;
@@ -227,7 +243,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                 view = Am;
             } else if (source.equals(Vp.getRefesh())) {
                 try {
-//                    app.loadBarang();
+                    app.loadPeminjaman();
                     Vp.setListPeminjaman(app.getListpeminjaman());
                 } catch (Exception io) {
                     Vp.ViewErrorMsg(io.getMessage());
@@ -271,7 +287,32 @@ public class Controller extends MouseAdapter implements ActionListener {
                 } catch (Exception io) {
                     Ab.ViewErrorMsg(io.getMessage());
                 }
-            }Ab.reset();
+            }
+            Ab.reset();
         }
     }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (view instanceof ViewAnggotaAndDelete) {
+            ViewAnggotaAndDelete Va = (ViewAnggotaAndDelete) view;
+            String IDanggota = Va.getSelectedIdAnggota();
+            if (IDanggota != null) {
+                Va.setDetailAnggota(app.getAnggota(IDanggota).toString());
+            }
+        } else if (view instanceof ViewBarang) {
+            ViewBarang Vb = (ViewBarang) view;
+            String IDBarang = Vb.getSelelctedIDBarang();
+            if (IDBarang != null) {
+                Vb.setDetailBarang(app.getBarang(IDBarang).toString());
+            }
+        } else if (view instanceof ViewPeminjaman) {
+            ViewPeminjaman Vp = (ViewPeminjaman) view;
+            String IDPeminjaman = Vp.getSelectedIdPeminjaman();
+            if (IDPeminjaman != null) {
+                Vp.setDetailPeminjaman(app.getpeminjaman(IDPeminjaman).toString());
+            }
+        }
+    }
+
 }

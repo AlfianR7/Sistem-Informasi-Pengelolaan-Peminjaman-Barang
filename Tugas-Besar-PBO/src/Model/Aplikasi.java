@@ -10,6 +10,13 @@ import java.util.stream.Collectors;
 import java.util.Arrays;
 import java.io.EOFException;
 
+/**
+ *
+ * @author Alfian R7
+ */
+// Created by:
+// Nama     :Alfian Rahman Aziz
+// NIM      : 1301150063
 public class Aplikasi {
 
     private ArrayList<Petugas> daftarPetugas;
@@ -34,9 +41,8 @@ public class Aplikasi {
 //####################################################################################################
 
 //  PENGOLAHAN DATA ANGGOTA
-    public void addAnggota(String nama, String jenisKelamin) throws IOException {
+    public void addAnggota(String nama, String jenisKelamin) {
         daftarAnggota.add(new Anggota(nama, jenisKelamin));
-        saveAnggota();
     }
 
     public String[] ListAnggota() {
@@ -71,10 +77,10 @@ public class Aplikasi {
     }
 
     public String[] getListAnggota() {
-        List idEmp = daftarAnggota.stream()
-                .filter(e -> !(e instanceof Anggota))
-                .map(e -> e.getIdAnggota()).collect(Collectors.toList());
-        return (String[]) idEmp.stream().toArray(size -> new String[size]);
+        List listAng = daftarAnggota.stream()
+                .filter(a -> !(a instanceof Anggota))
+                .map(a -> a.toString()).collect(Collectors.toList());
+        return (String[]) listAng.stream().toArray(size -> new String[size]);
     }
 
     public Anggota getAnggota(String idAnggota) {
@@ -97,27 +103,34 @@ public class Aplikasi {
     }
 
     public String[] ListPetugas() {
-        List listPtg = daftarPetugas.stream().map(E -> "ID Petugas : " + E.getIdPetugas() + ", "
-                + "Nama Petugas : " + E.getNama() + ", "
-                + "Jenis Kelamin : " + E.getJenisKelamin()).collect(Collectors.toList());
+        List listPtg = daftarPetugas.stream().map(P -> "ID Petugas : " + P.getIdPetugas() + ", "
+                + "Nama Petugas : " + P.getNama() + ", "
+                + "Jenis Kelamin : " + P.getJenisKelamin()).collect(Collectors.toList());
         return (String[]) listPtg.stream().toArray(arr -> new String[arr]);
     }
 
     public Petugas getPetugas(String idPetugas) {
         return daftarPetugas.stream()
-                .filter(a -> a.getIdPetugas().equals(idPetugas))
+                .filter(p -> p.getIdPetugas().equals(idPetugas))
                 .findFirst().orElse(null);
     }
 
     public Petugas getPetugasUsername(String user) {
         return daftarPetugas.stream()
-                .filter(a -> a.getUser().equals(user))
+                .filter(p -> p.getUser().equals(user))
                 .findFirst().orElse(null);
     }
+
+    public String[] getListPetugas() {
+        List idPtg = daftarPetugas.stream()
+                .filter(p -> !(p instanceof Petugas))
+                .map(p -> p.toString()).collect(Collectors.toList());
+        return (String[]) idPtg.stream().toArray(size -> new String[size]);
+    }
+
 //####################################################################################################
 //####################################################################################################
 // LOGIN PETUGAS
-
     public void LoginPetugas(String username, String pass) {
         Petugas P = getPetugasUsername(username);
         if ("admin".equals(username) || P.getUser().equals(username)) {
@@ -148,17 +161,17 @@ public class Aplikasi {
     }
 
     public String[] ListBarang() throws IOException {
-        List listBrg = daftarBarang.stream().map(E -> "ID Barang : " + E.getIdBarang() + ", "
-                + "Nama Barang : " + E.getNamaBarang() + ", "
-                + "Status : " + E.getStatus()).collect(Collectors.toList());
+        List listBrg = daftarBarang.stream().map(B -> "ID Barang : " + B.getIdBarang() + ", "
+                + "Nama Barang : " + B.getNamaBarang() + ", "
+                + "Status : " + B.getStatus()).collect(Collectors.toList());
         return (String[]) listBrg.stream().toArray(arr -> new String[arr]);
     }
 
     public String[] getListBarang() {
-        List idBrg = daftarBarang.stream()
-                .filter(e -> !(e instanceof Barang))
-                .map(e -> e.getIdBarang()).collect(Collectors.toList());
-        return (String[]) idBrg.stream().toArray(size -> new String[size]);
+        List listBrg = daftarBarang.stream()
+                .filter(b -> !(b instanceof Barang))
+                .map(b -> b.toString()).collect(Collectors.toList());
+        return (String[]) listBrg.stream().toArray(size -> new String[size]);
     }
 
     public Barang getBarang(String idBarang) {
@@ -188,6 +201,12 @@ public class Aplikasi {
         }
     }
 
+    public Peminjaman getpeminjaman(String idPeminjam) {
+        return daftarPeminjaman.stream()
+                .filter(p -> p.getIdPinjaman().equals(idPeminjam))
+                .findFirst().orElse(null);
+    }
+
     public void ListPeminjaman() {
         for (Peminjaman x : daftarPeminjaman) {
             x.ViewListPeminjaman();
@@ -197,24 +216,41 @@ public class Aplikasi {
     public String[] getListpeminjaman() {
         List idPnj = daftarPeminjaman.stream()
                 .filter(e -> !(e instanceof Peminjaman))
-                .map(e -> e.getIdPinjaman()).collect(Collectors.toList());
+                .map(e -> e.toString()).collect(Collectors.toList());
         return (String[]) idPnj.stream().toArray(size -> new String[size]);
+    }
+
+////####################################################################################################
+////####################################################################################################
+    public void viewList(String[] list) {
+        Arrays.stream(list).forEach(System.out::println);
+    }
+
+    public int LoginAuth() {
+        return IntAuth;
     }
 ////####################################################################################################
 ////####################################################################################################
 // UPDATE DATA FROM FILE
 
+// FILE ANGGOTA
     public void loadAnggota() throws FileNotFoundException, IOException {
         try {
             daftarAnggota = (ArrayList<Anggota>) save.getObject("fileAnggota.txt");
+//            System.out.println("debugAnggota0");
         } catch (FileNotFoundException ex) {
             File f = new File("fileAnggota.txt");
             f.createNewFile();
+//            System.out.println("debugAnggota1");
         } catch (EOFException ex) {
             daftarAnggota = new ArrayList<>();
+//            System.out.println("debugAnggota2");
         } catch (IOException | ClassNotFoundException ex) {
+//            System.out.println("debugAnggota3");
             throw new IOException("error " + ex.getMessage());
         }
+//        System.out.println("debugAnggota4");
+
     }
 
     public void saveAnggota() throws FileNotFoundException, IOException {
@@ -227,27 +263,27 @@ public class Aplikasi {
         }
     }
 
-    public void viewList(String[] list) {
-        Arrays.stream(list).forEach(System.out::println);
-    }
-
-    public int LoginAuth() {
-        return IntAuth;
-    }
-
 // FILE BARANG
     public void loadBarang() throws FileNotFoundException, IOException {
         try {
             daftarBarang = (ArrayList<Barang>) save.getObject("fileBarang.txt");
+//            System.out.println("debugBarang0");
         } catch (FileNotFoundException ex) {
             File f = new File("fileBarang.txt");
             f.createNewFile();
+//            System.out.println("debugBarang1");
         } catch (EOFException ex) {
             daftarBarang = new ArrayList<>();
+//            System.out.println("debugBarang2");
         } catch (IOException | ClassNotFoundException ex) {
+//            System.out.println("debugBarang3");
             throw new IOException("error " + ex.getMessage());
         }
-    }
+//        System.out.println("debugBarang4");
+
+        }
+
+    
 
     public void saveBarang() throws FileNotFoundException, IOException {
         try {
@@ -260,17 +296,27 @@ public class Aplikasi {
     }
 
 // FILE PEMINJAMAN
-    public void loadPinjaman() throws FileNotFoundException, IOException {
+    public void loadPeminjaman() throws FileNotFoundException, IOException {
         try {
             daftarPeminjaman = (ArrayList<Peminjaman>) save.getObject("filePeminjaman.txt");
+//            System.out.println("debugpinjam0");
+
         } catch (FileNotFoundException ex) {
             File f = new File("filePeminjaman.txt");
             f.createNewFile();
+//            System.out.println("debugpinjam1");
+
         } catch (EOFException ex) {
             daftarPeminjaman = new ArrayList<>();
+//            System.out.println("debugpinjam2");
+
         } catch (IOException | ClassNotFoundException ex) {
+//            System.out.println("debugpinjam3");
+
             throw new IOException("error " + ex.getMessage());
         }
+//        System.out.println("debugpinjam4");
+
     }
 
     public void savePeminjaman() throws FileNotFoundException, IOException {
@@ -282,19 +328,29 @@ public class Aplikasi {
             throw new IOException("error " + ex.getMessage());
         }
     }
-    
+
 //FILE PETUGAS
     public void loadPetugas() throws FileNotFoundException, IOException {
         try {
             daftarPetugas = (ArrayList<Petugas>) save.getObject("filePetugas.txt");
+//            System.out.println("debugpetugas0");
+
         } catch (FileNotFoundException ex) {
             File f = new File("filePetugas.txt");
             f.createNewFile();
+//            System.out.println("debugpetugas1");
+
         } catch (EOFException ex) {
             daftarPetugas = new ArrayList<>();
+//            System.out.println("debugpetugas2");
+
         } catch (IOException | ClassNotFoundException ex) {
+//            System.out.println("debugpetugas3");
+
             throw new IOException("error " + ex.getMessage());
         }
+//        System.out.println("debugpetugas4");
+
     }
 
     public void savePetugas() throws FileNotFoundException, IOException {

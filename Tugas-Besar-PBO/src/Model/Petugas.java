@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// Created by:
+// Nama     : Ilham Nugraha
+// NIM      : 1301154329
+
 public class Petugas extends Orang implements Serializable {
 
     private static int ID = 1;
@@ -21,7 +25,8 @@ public class Petugas extends Orang implements Serializable {
     public String getUser() {
         return user;
     }
-
+    
+    
     public String getPass() {
         return pass;
     }

@@ -8,6 +8,14 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.io.IOException;
 
+/**
+ *
+ * @author Alfian R7
+ */
+// Created by:
+// Nama     :Alfian Rahman Aziz
+// NIM      : 1301150063
+
 public class ViewConsole {
 
     private Aplikasi model;
@@ -32,7 +40,6 @@ public class ViewConsole {
 
     public void Menu() {
         int n = 0;
-        Anggota A;
         do {
             try {
                 System.out.println("Menu");
@@ -93,7 +100,6 @@ public class ViewConsole {
                                         case 2:
                                             System.out.println("Daftar Anggota ");
                                             model.viewList(model.ListAnggota());
-//                                            A.saveAnggota();
                                             System.out.println("-------------------------------------");
                                             break;
                                         case 3:
@@ -117,6 +123,7 @@ public class ViewConsole {
                                             System.out.println("Nama Barang");
                                             String namaBarang = scanStr.nextLine();
                                             model.addBarang(namaBarang);
+                                            model.saveBarang();
                                             System.out.println("-------------------------------------");
                                             break;
                                         case 7:
@@ -128,8 +135,8 @@ public class ViewConsole {
                                             System.out.println("Masukan Nama Anggota");
                                             String namaAnggota = scanStr.nextLine();
                                             model.addBarangPinjaman(idBarang, namaBarangP);
-                                            System.out.println("test");
                                             model.addPeminjaman(idBarang, namaAnggota);
+                                            model.savePeminjaman();
                                             break;
                                     }
                                 } catch (Exception e) {
@@ -164,6 +171,7 @@ public class ViewConsole {
                             }
                         }
                         model.addAnggota(nama, jenisKelamin);
+                        model.saveAnggota();
                         break;
                     case 3:
                         String Nama;
@@ -188,10 +196,16 @@ public class ViewConsole {
                             }
                         }
                         model.addPetugas(Nama, JenisKelamin, password);
+                        model.savePetugas();
                         break;
                     case 4:
                         System.out.println("Load Data");
+
+                        model.loadBarang();
+                        model.loadPetugas();
+                        model.loadPeminjaman();
                         model.loadAnggota();
+
                         break;
                     case 0:
                         System.out.println("Terima Kasih");

@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+// Created by:
+// Nama     :Ahmad Fathoni Z
+// NIM      : 1301154217
+
 public class Peminjaman implements Serializable {
     
     private static int ID = 1;
@@ -40,4 +44,10 @@ public class Peminjaman implements Serializable {
         System.out.println("----------------------------------------------");
     }
     
+    public String toString(){
+        String z=null;
+        for (Barang x : pinjaman){
+            z = "Peminjam : "+ pinjaman+ " ID Pinjaman : "+ idPinjaman +" ID Barang : " + x.getIdBarang() + " Nama Barang : "+  x.getNamaBarang();
+        }return z;
+    }
 }

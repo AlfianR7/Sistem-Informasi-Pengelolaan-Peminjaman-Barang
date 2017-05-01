@@ -12,6 +12,10 @@ import javax.swing.JOptionPane;
  *
  * @author Alfian R7
  */
+// Created by:
+// Nama     :Alfian Rahman Aziz
+// NIM      : 1301150063
+
 public class AddBarang extends javax.swing.JFrame implements View{
 
     /**

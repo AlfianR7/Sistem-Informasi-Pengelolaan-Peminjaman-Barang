@@ -1,5 +1,11 @@
 package Model;
+
+// Created by:
+// Nama     : Ilham Nugraha
+// NIM      : 1301154329
+
 public class Orang {
+
     String nama;
     String jenisKelamin;
 
@@ -23,6 +29,5 @@ public class Orang {
     public void setJenisKelamin(String jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
-    
-    
+
 }

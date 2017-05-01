@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
  *
  * @author Alfian R7
  */
+// Created by:
+// Nama     :Alfian Rahman Aziz
+// NIM      : 1301150063
 public interface View {
     
     public void addListener(ActionListener e);

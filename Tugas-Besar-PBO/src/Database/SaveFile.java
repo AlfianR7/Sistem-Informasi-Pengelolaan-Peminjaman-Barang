@@ -2,19 +2,26 @@ package Database;
 
 import java.io.*;
 
+/**
+ *
+ * @author Alfian R7
+ */
+// Created by:
+// Nama     :Alfian Rahman Aziz
+// NIM      : 1301150063
 public class SaveFile {
 
     public void saveObject(Object o, String file) throws FileNotFoundException, IOException {
-        FileOutputStream fout = new FileOutputStream("fileAnggota.txt");
+        FileOutputStream fout = new FileOutputStream(file);
         ObjectOutputStream oout = new ObjectOutputStream(fout);
         oout.writeObject(o);
         oout.flush();
     }
 
     public Object getObject(String file) throws FileNotFoundException, IOException,
-        ClassNotFoundException, EOFException {
-            ObjectInputStream oin = new ObjectInputStream(new FileInputStream("fileAnggota.txt"));
-            return oin.readObject();
+            ClassNotFoundException, EOFException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+        return ois.readObject();
     }
 }
 

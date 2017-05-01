@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
  *
  * @author Alfian R7
  */
+// Created by:
+// Nama     :Alfian Rahman Aziz
+// NIM      : 1301150063
 public class Login extends javax.swing.JFrame implements View{
 
     /**
@@ -37,6 +40,7 @@ public class Login extends javax.swing.JFrame implements View{
         jLabel3 = new javax.swing.JLabel();
         BtnLogin = new javax.swing.JButton();
         BtnBack = new javax.swing.JButton();
+        BtnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +60,8 @@ public class Login extends javax.swing.JFrame implements View{
 
         BtnBack.setText("Back");
 
+        BtnRefresh.setText("Refresh");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -65,10 +71,15 @@ public class Login extends javax.swing.JFrame implements View{
                 .addComponent(jLabel1)
                 .addGap(64, 64, 64))
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BtnRefresh)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -98,7 +109,8 @@ public class Login extends javax.swing.JFrame implements View{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnBack)
-                    .addComponent(BtnLogin))
+                    .addComponent(BtnLogin)
+                    .addComponent(BtnRefresh))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -129,11 +141,16 @@ public class Login extends javax.swing.JFrame implements View{
         textuser.setText("");
         textpass.setText("");
     }
+    
+    public Object getBtnRefresh(){
+        return BtnRefresh;
+    }
 
     @Override
     public void addListener(ActionListener e){
         BtnLogin.addActionListener(e);
         BtnBack.addActionListener(e);
+        BtnRefresh.addActionListener(e);
     }
     
     @Override
@@ -143,6 +160,7 @@ public class Login extends javax.swing.JFrame implements View{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBack;
     private javax.swing.JButton BtnLogin;
+    private javax.swing.JButton BtnRefresh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
